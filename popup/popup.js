@@ -12,7 +12,11 @@ function renderReport(report) {
       Session=${report.storage.session}, 
       IndexedDB=${report.storage.indexedDB}
     </p>
-    <p><b>Canvas Fingerprint:</b> ${report.fingerprint ? "Detectado" : "Não"}</p>
+    <p><b>Canvas Fingerprint:</b> 
+  ${report.fingerprint && report.fingerprint.length > 0 
+    ? "Detectado via " + report.fingerprint.join(", ") 
+    : "Não"}
+</p>
     <p><b>Scripts externos suspeitos:</b> ${report.hijacking.length}</p>
     <p><b>Pontuação de Privacidade:</b> ${report.score}</p>
   `;

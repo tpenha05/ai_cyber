@@ -65,7 +65,7 @@ function calculateScore(tabId) {
   let hijacking = scoreByTab[tabId]?.hijacking || [];
 
   let score = trackers * 2 + cookies.thirdParty * 2 + storage.local + storage.session + storage.indexedDB;
-  if (fingerprint) score += 5;
+  if (fingerprint.length > 0) score += 5;
   if (hijacking.length > 0) score += 10;
 
   return { trackers, cookies, storage, fingerprint, hijacking, score };
@@ -82,7 +82,8 @@ browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       return false;
 
      case "fingerprint_detected":
-       scoreByTab[tabId].fingerprint = true;
+       scoreByTab[tabId].fingerprint = scoreByTab[tabId].fingerprint || [];
+       scoreByTab[tabId].fingerprint.push(msg.method);
       sendResponse({ ok: true });
       return false;
 

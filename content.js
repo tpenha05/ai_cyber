@@ -17,7 +17,7 @@
 
   function flagFingerprint(method) {
     console.warn("Canvas Fingerprint detectado via:", method);
-    browser.runtime.sendMessage({ type: "fingerprint_detected" });
+    browser.runtime.sendMessage({ type: "fingerprint_detected", method });
   }
 
   const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
