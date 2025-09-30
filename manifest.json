@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "AntiRastreador Firefox",
+  "version": "1.1",
+  "description": "Detecta rastreadores, cookies, armazenamento local e fingerprint.",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+  {
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }
+],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "48": "icons/icon.png"
+  }
+  
+}
